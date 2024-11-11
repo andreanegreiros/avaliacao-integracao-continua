@@ -1,0 +1,21 @@
+# Pós-graduação em Automação de Testes de Software | PGATS 
+Disciplina:  Integração Contínua e Testes Automatizados
+Professor: Samuel Lucas
+Aluno: Andréa Negreiros de Almeida
+
+## Descrição
+Este projeto contém testes automatizados para implementação do trabalho da Disciplina de Integração Contínua e Testes Automatizados.
+
+## Pré-requisitos
+- Node.js
+- NPM 
+
+## Instalação
+npm install
+
+## Para rodar os testes utilize o comando
+npx cypress run
+
+# Resultados
+Após execução completa dos testes, abrir o terminar e executar npx cypress run
+Os resultados dos testes são armazenados na pasta cypress\reports no formato HTML. 

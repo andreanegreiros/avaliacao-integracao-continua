@@ -1,0 +1,48 @@
+# Disparo manual do projeto de Automação WEB na disciplina de Integração Contínua
+
+name: 'Execução Manual'
+
+on: workflow_dispatch
+
+jobs:
+  e2e-tests:
+    runs-on: [ubuntu-latest]
+
+    container:
+      image: cypress/included:12.17.1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache dependências Node.js
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Instalando dependências
+        run: npm install
+
+      - name: Verificar se o diretório de relatórios existe
+        run: |
+          if [ ! -d "cypress/reports/mochawesome-report" ]; then
+            echo "Relatório não encontrado!";
+            exit 1;
+          fi
+
+      - name: Executar testes
+        run: npx cypress run
+
+      - name: Upload de relatórios de teste
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: mochawesome-reports
+          path: cypress/reports/mochawesome-report/
