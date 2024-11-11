@@ -5,7 +5,7 @@ describe('Trabalho ', () => {
     const email = faker.internet.email();
     const password = faker.internet.password();
 
-    it('Test Case 1: Register User', () => {
+    it.only('Test Case 1: Register User', () => {
         //criar conta
         cy.createAccount(userName, email, password);
 
